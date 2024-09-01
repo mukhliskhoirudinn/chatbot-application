@@ -1,0 +1,48 @@
+{
+  "question": [
+    {
+      "question": "hallo",
+      "answer": "hallo, ada yang bisa saya bantu ?"
+    },
+    {
+      "question": "bisa bantu saya melakukan pengecekan daging ?",
+      "answer": "Tentu Bisa, Tolong berikan saya rincian informasi terkait kualitas daging yang ingin anda cek."
+    },
+    {
+      "question": "Apa itu bakso ?",
+      "answer": "Bakso adalah salah satu kuliner yang enak lezat dan bergiji, bakso juga terbuat dari daging sapi pilihan"
+    },
+    {
+      "question": "p",
+      "answer": "y"
+    },
+    {
+      "question": "kamu yang bau",
+      "answer": "? Saya bau "
+    },
+    {
+      "question": "saya bingung nih",
+      "answer": "bingung kenapa ? coba ceritakan permasalahan mu pada ku !!!"
+    },
+    {
+      "question": "siapa si kamu",
+      "answer": "saya adalah chatBOT yang diutus muklis dan rama untuk menjawab dari pertanyaan yang diberikan"
+    },
+    {
+      "question": "siapa nama dosen Kecerdasan Buatan di Universitas Teknokrat Indonesia",
+      "answer": "Riska Amalia"
+    },
+    {
+      "question": "hay",
+      "answer": "hallo"
+    },
+    {
+      "question": "Apa warna daging SAPI ?",
+      "answer": "Warna daging sapi segar umumnya adalah merah cerah."
+    },
+    {
+      "question": "C:/laragon/bin/python/python-3.10/python.exe \"d:/Data PC/SEMESTER 4/Kecerdasan Buatan/website-chatbot/app.py\"",
+      "answer": "C:/laragon/bin/python/python-3.10/python.exe \"d:/Data PC/SEMESTER 4/Kecerdasan Buatan/website-chatbot/app.py\""
+    }
+  ]
+}

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Bot</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 500px;
+            width: 100%;
+            height: 500px;
+        }
+
+        h1 {
+            font-size: 30px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: black;
+        }
+
+        input[type="text"] {
+            width: 75%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            /* background-color: #4CAF50; */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .trash-button {
+            padding: 5px;
+            /* Padding lebih kecil untuk tombol icon sampah */
+            max-width: 50px;
+            margin-top: 5px;
+            margin-left: 10px;
+            /* max-width untuk membatasi lebar tombol icon sampah */
+            width: 35px;
+            height: 30px;
+        }
+
+        .send-button {
+            width: 25%;
+            min-width: 120px;
+            /* Lebar minimum untuk tombol Kirim */
+            margin-left: 10px;
+            /* Tambahkan margin kiri untuk memisahkan tombol dari input */
+        }
+
+        .chat-area {
+            background-color: #f9f9f9;
+            border-radius: 15px;
+            padding: 10px;
+            height: 350px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+        }
+
+        .message {
+            margin-bottom: 10px;
+        }
+
+        .user-message {
+            background-color: #55ba58;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 10px 10px 0 10px;
+            margin: 5px 5px 5px 20%;
+            /* Sesuaikan margin agar kotak berada di kiri */
+            align-self: flex-start;
+        }
+
+        .bot-message {
+            background-color: #f0eded;
+            color: black;
+            /* Ubah warna teks untuk membedakan dari pesan pengguna */
+            padding: 10px 15px;
+            border-radius: 10px 10px 10px 0;
+            margin: 5px 20% 5px 5px;
+            /* Sesuaikan margin agar kotak berada di kanan */
+            align-self: flex-end;
+            text-align: justify;
+        }
+
+        .input-container {
+            display: flex;
+            align-items: flex-start;
+            /* Menyesuaikan posisi tombol ke atas */
+        }
+
+        .input-container .trash-button {
+            background-color: rgb(192, 66, 66);
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .input-container .send-button {
+            background-color: #55ba58;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Chat<span style="color: #55ba58;">BOT</span></h1>
+        <div class="chat-area" id="chatArea">
+            <!-- Tambahkan pesan chat awal di sini -->
+            <div class="message">
+                <div class="bot-message">bot : Selamat datang di ChatBOT, Ada yang bisa saya bantu?</div>
+            </div>
+        </div>
+        <div class="input-container">
+            <input type="text" id="userInput" placeholder="Tuliskan Pertanyaan Anda...">
+            <button class="trash-button" onclick="clearChat()"><i class="fa fa-trash"></i></button>
+            <!-- Ganti tombol dengan ikon sampah -->
+            <button class="send-button" onclick="sendMessage()">Kirim</button>
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            var userInput = document.getElementById('userInput').value;
+            appendMessage('user', userInput);
+            document.getElementById('userInput').value = '';
+
+            fetch('/api?question=' + encodeURIComponent(userInput))
+                .then(response => response.json())
+                .then(data => {
+                    appendMessage('bot', data.answer);
+                });
+        }
+
+        function appendMessage(sender, message) {
+            var chatArea = document.getElementById('chatArea');
+            var messageDiv = document.createElement('div');
+            messageDiv.classList.add('message');
+
+            if (sender === 'user') {
+                messageDiv.innerHTML = '<div class="user-message">user : ' + message + '</div>';
+            } else {
+                messageDiv.innerHTML = '<div class="bot-message">bot : ' + message + '</div>';
+            }
+
+            chatArea.appendChild(messageDiv);
+            chatArea.scrollTop = chatArea.scrollHeight;
+        }
+
+        function clearChat() {
+            var chatArea = document.getElementById('chatArea');
+            chatArea.innerHTML = ''; // Menghapus semua isi dari elemen chatArea
+        }
+
+        // Tambahkan event listener untuk menangani tombol Enter
+        document.getElementById('userInput').addEventListener('keypress', function (event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+
+</body>
+
+</html>
